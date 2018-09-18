@@ -345,6 +345,21 @@ void SetDevicePower(power_t rpower, int source)
     Serial.write('\n');
     Serial.flush();
   }
+  else if ((LCTECH1 == Settings.module) || (LCTECH2 == Settings.module)) {
+    for (byte i = 0; i < devices_present; i++) {
+      if ( i > 0 ) delay( 20 );
+      
+      state = rpower &1;
+
+      Serial.write(0xA0);
+      Serial.write(i+1);
+      Serial.write(state);
+      Serial.write(0xA0+i+1+state);
+      Serial.flush();
+      
+      rpower >>= 1;   
+    }
+  }    
   else if (EXS_RELAY == Settings.module) {
     SetLatchingRelay(rpower, 1);
   }
@@ -2400,6 +2415,16 @@ void GpioInit()
     devices_present = 2;
     baudrate = 19200;
   }
+  else if (LCTECH1 == Settings.module) {
+    Settings.flag.mqtt_serial = 0;
+    devices_present = 1;
+    baudrate = 9600;
+  }
+  else if (LCTECH2 == Settings.module) {
+    Settings.flag.mqtt_serial = 0;
+    devices_present = 2;
+    baudrate = 115200;
+  }  
   else if (CH4 == Settings.module) {
     Settings.flag.mqtt_serial = 0;
     devices_present = 4;

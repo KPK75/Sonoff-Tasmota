@@ -231,6 +231,8 @@ enum SupportedModules {
   SHELLY1,
   SHELLY2,
   PHILIPS,
+  LCTECH1,
+  LCTECH2,
   MAXMODULE };
 
 /********************************************************************************************/
@@ -401,7 +403,9 @@ const uint8_t kModuleNiceList[MAXMODULE] PROGMEM = {
   AILIGHT,
   WEMOS,
   WITTY,
-  PHILIPS
+  PHILIPS,
+  LCTECH1,
+  LCTECH2
 };
 
 // Default module settings
@@ -1054,6 +1058,32 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      0, 0,
      GPIO_PWM1,        // GPIO15 light intensity
      0, 0
+  },
+  { "LCTECH 1Relay",     // LC Technology WiFi 1 Relay
+     0,
+     GPIO_TXD,          // GPIO01 Relay control
+     0,
+     GPIO_RXD,          // GPIO03 Relay control
+     0,                 
+     0,
+     0, 0, 0, 0, 0, 0,  // Flash connection
+     0,
+     0,                
+     0,                
+     0, 0, 0
+  },
+  { "LCTECH 2Relay",     // LC Technology WiFi 2 Relay
+     0,
+     GPIO_TXD,          // GPIO01 Relay control
+     0,
+     GPIO_RXD,          // GPIO03 Relay control
+     0,                 
+     0,
+     0, 0, 0, 0, 0, 0,  // Flash connection
+     0,
+     0,                
+     0,                
+     0, 0, 0
   }
 };
 
